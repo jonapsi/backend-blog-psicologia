@@ -13,7 +13,7 @@ export class AutorController {
         try {
             const data: CreateAutorDTO = req.body;
 
-            // 1. Crear la instancia del autor
+
             const nuevoAutor = autorRepository.create({
                 nombre: data.nombre,
                 apellido: data.apellido
@@ -32,12 +32,28 @@ export class AutorController {
     // ==========================================
     // R E A D   (Todos)
     // ==========================================
-    getAllAutores = async (req: Request, res: Response) => {
+    /* getAllAutores = async (req: Request, res: Response) => {
         try {
             // Buscamos todos los autores e incluimos los blogs relacionados
             const autores = await autorRepository.find({
                 relations: ['blog'] // Trae el array de blogs de cada autor
             });
+
+            return res.status(200).json(autores);
+        } catch (error) {
+            console.error("Error al obtener autores:", error);
+            return res.status(500).json({ message: "Error interno del servidor" });
+        }
+    }; */
+    getAllAutores = async (req: Request, res: Response) => {
+        try {
+            const autores = await autorRepository.createQueryBuilder("autores")
+                .select([
+                    "autores.id",
+                    "autores.nombre",
+                    "autores.apellido"
+                ])
+                .getMany();
 
             return res.status(200).json(autores);
         } catch (error) {

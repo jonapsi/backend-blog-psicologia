@@ -18,8 +18,6 @@ export class Blog {
     @Column({ type: "timestamp", nullable: false, default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
-    @Column({ type: "varchar", length: 50 })
-    author!: string;
 
     @ManyToOne(() => Autores, (autor) => autor.blog, { nullable: false, onDelete: 'CASCADE' })
     autor!: Autores;

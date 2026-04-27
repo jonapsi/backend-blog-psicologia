@@ -12,6 +12,7 @@ export class ArticulosRoutes {
         router.put('/:id', controller.updateBlog);
         router.delete('/:id', controller.deleteBlog);
         router.get('/:id', controller.getBlogById);
+        router.patch('/:id', controller.patchBlog);
         return router;
     }
 }
