@@ -7,6 +7,7 @@ export class AutoresRoutes {
         const controller = new AutorController();
         router.post('/', controller.createAutor);
         router.get('/', controller.getAllAutores);
+        router.get("/:id", controller.getAutorById)
         router.put('/:id', controller.updateAutor);
         router.delete('/:id', controller.deleteAutor);
         return router;
