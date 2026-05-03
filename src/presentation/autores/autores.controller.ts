@@ -62,6 +62,22 @@ export class AutorController {
         }
     };
 
+    getAutorById = async (req: Request, res: Response) => {
+        try {
+            const id = req.params.id as string;
+            const autor = await autorRepository.findOneBy({ id });
+            if (!autor) {
+                return res.status(404).json({ message: "Autor no encontrado" });
+            }
+            console.log("Autor Encontrado: " + autor?.nombre + " " + autor?.apellido);
+            return res.status(200).json(autor);
+
+        } catch (error) {
+            console.error("Error al obtener autor por id:", error);
+            return res.status(500).json({ message: "Error interno del servidor" });
+        }
+    }
+
     // ==========================================
     // U P D A T E
     // ==========================================
